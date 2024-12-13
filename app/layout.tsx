@@ -4,6 +4,7 @@ import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import Providers from "@/components/Providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,18 +28,16 @@ export default function RootLayout({
       >
         {/* <SidebarProvider >
           <AppSidebar /> */}
-            <ThemeProvider
+        <main>
+          {/* <ThemeProvider
             attribute="class"
             defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-            >
-          <main>
-            {/* <SidebarTrigger /> */}
-            {children}
+            > */}
+          {/* <SidebarTrigger /> */}
+          <Providers>{children}</Providers>
 
-          </main>
-          </ThemeProvider>
+          {/* </ThemeProvider> */}
+        </main>
         {/* </SidebarProvider> */}
       </body>
     </html>
