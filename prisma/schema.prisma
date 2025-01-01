@@ -12,3 +12,59 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// Models
+model User{
+  id          String   @id @default(uuid())
+  email       String   @unique
+  provider    Provider
+  streams     Stream[]
+  upvotes     UpVote[]
+  rooms       Room[]
+}
+model Room{
+  id           String   @id @default(uuid())
+  name         String
+  description  String
+  userId       String
+  isActive     Boolean
+  image        String
+  streams      Stream[]
+  user         User    @relation(fields: [userId], references: [id])
+}
+
+model Stream{
+  id           String   @id @default(uuid())
+  type         StreamType
+  active       Boolean @default(true)
+  url          String
+  extractedUrl String
+  upVotes      Int
+  title        String
+  bigImg       String
+  smallImg     String
+  userId       String
+  roomId       String
+  isEnded      Boolean
+  upvotes      UpVote[]
+  user         User    @relation(fields: [userId], references: [id])
+  room         Room    @relation(fields:[roomId], references: [id])
+}
+model UpVote{
+  id          String   @id @default(uuid())
+  userId      String
+  streamId    String
+  user        User    @relation(fields: [userId], references: [id])
+  stream      Stream   @relation(fields: [streamId], references: [id])
+  createdAt   DateTime @default(now()) 
+  @@unique([streamId, userId])
+}
+
+// Enums
+enum Provider{
+  Google
+}
+enum StreamType{
+  Spotify
+  Youtube
+}

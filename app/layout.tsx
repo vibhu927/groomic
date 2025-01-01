@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/AppSidebar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Providers from "@/components/Providers";
 
@@ -24,11 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased scrollbar-hide overflow-y-auto`}
       >
         {/* <SidebarProvider >
           <AppSidebar /> */}
-        <main>
+        <main >
           {/* <ThemeProvider
             attribute="class"
             defaultTheme="system"
